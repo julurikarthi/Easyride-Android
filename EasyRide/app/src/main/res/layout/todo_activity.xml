@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/rootLayout"
+    android:background="@color/color_primary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_margin="20dp"
+        android:textSize="20dp"
+        android:text="To-do"></TextView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/sharerideimage"></ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="Start driving to start earning "></TextView>
+
+            <LinearLayout
+                android:id="@+id/addCarDetailsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedcornorbg"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circularcorner"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/carimage"></ImageView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/cardetailstext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:paddingTop="15dp"
+                            android:text="Car details"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"></TextView>
+
+                        <ImageView
+                            android:id="@+id/carsuccessicon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="210dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/correct"
+                            android:visibility="invisible"></ImageView>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="1dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:paddingBottom="15dp"
+                        android:text="We need the color, year, make and model"
+                        android:textColor="#BEBDC2"
+                        android:textSize="15dp"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/drivinglicenceView"
+                android:background="@drawable/roundedcornorbg"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/circularcorner">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/driverslicense"></ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Driver's license"
+                            android:textSize="15dp"
+                            android:id="@+id/drivinglicence"
+                            android:paddingTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/white">
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="199dp"
+                            android:layout_marginTop="10dp"
+                            android:visibility="invisible"
+                            android:id="@+id/driversuccesicon"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/correct"></ImageView>
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confirm your identity"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="1dp"
+                        android:paddingBottom="15dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="#BEBDC2">
+                    </TextView>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:id="@+id/socialdocumenttile"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundedcornorbg"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/circularcorner">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/idcard"></ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Social Document"
+                            android:textSize="15dp"
+                            android:id="@+id/socialdocument"
+                            android:paddingTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/white">
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/socialidicon"
+                            android:visibility="invisible"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/correct"></ImageView>
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We need to verify identity"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="1dp"
+                        android:paddingBottom="15dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="#BEBDC2">
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/profileDetailsView"
+                android:background="@drawable/roundedcornorbg"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/circularcorner">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/user"></ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile Details"
+                            android:textSize="15dp"
+                            android:id="@+id/profilephoto"
+                            android:paddingTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/white">
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/profilephotosuccuss"
+                            android:visibility="invisible"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/correct"></ImageView>
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Make it easy for rides to find you"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="1dp"
+                        android:paddingBottom="15dp"
+                        android:id="@+id/profileidicon"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="#BEBDC2">
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+    </LinearLayout>
+</ScrollView>
