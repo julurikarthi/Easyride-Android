@@ -1,6 +1,7 @@
 package com.easyride.driverapp.UIScreens
 
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -18,11 +19,16 @@ import com.easyride.driverapp.UIScreens.Fragments.MyBottomSheetFragment
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.os.Build
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.core.app.ActivityCompat
+import com.easyride.driverapp.Utilitys.Constants
+import com.easyride.driverapp.Utilitys.MySharedPreferences
 import com.easyride.driverapp.viewmodels.CameraViewModel
+import com.easyride.driverapp.viewmodels.CameraViewModelProtocol
 
-class CameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity(), CameraViewModelProtocol {
     var drivingImage: ImageView? = null
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageCapture: ImageCapture
@@ -31,6 +37,8 @@ class CameraActivity : AppCompatActivity() {
     var save: Button? = null
     var drivingphoto: Bitmap? = null
     var viewModel = CameraViewModel()
+    var driverImageId: String? = null
+    var progressbarview: ProgressBar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cameralayout)
@@ -40,8 +48,10 @@ class CameraActivity : AppCompatActivity() {
         drivingImage = findViewById(R.id.drivingImage)
         retake = findViewById(R.id.retake)
         save = findViewById(R.id.save)
+        progressbarview = findViewById(R.id.progressbarview)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        viewModel.delegate = this
         supportActionBar?.title = "Upload Driving license"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -55,8 +65,11 @@ class CameraActivity : AppCompatActivity() {
             takepicture()
         }
         save?.setOnClickListener {
-            drivingphoto?.let {
-                viewModel.uploadImage(it)
+            if(driverImageId?.isNotEmpty() == true) {
+                progressbarview?.visibility = View.VISIBLE
+                var preference = MySharedPreferences(this)
+                var dirverid = preference.getName(Constants.driverId)
+                viewModel.saveDrivingLicense(dirverid!!, driverImageId!!)
             }
         }
     }
@@ -87,13 +100,9 @@ class CameraActivity : AppCompatActivity() {
                 val photo: Bitmap? = result.data?.extras?.get("data") as Bitmap?
                 this.drivingphoto = photo
                 drivingImage?.setImageBitmap(photo)
+                viewModel.uploadImage(photo!!)
             }
         }
-
-    fun openBottomSheet(){
-        val bottomSheetFragment = MyBottomSheetFragment()
-        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -119,5 +128,17 @@ class CameraActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onsuccessImageUpload(imageid: String?) {
+        driverImageId = imageid
+    }
+
+    override fun onsavesuccessdrivinglicense() {
+        progressbarview?.visibility = View.GONE
+        val resultIntent = Intent()
+        resultIntent.putExtra("ItemAdded", "todocdrivinglicence")
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
     }
 }

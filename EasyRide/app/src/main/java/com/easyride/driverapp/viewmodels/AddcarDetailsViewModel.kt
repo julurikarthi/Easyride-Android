@@ -1,14 +1,12 @@
 package com.easyride.driverapp.viewmodels
 
 import android.util.Log
-import com.easyride.driverapp.LoginSinnupViewModel.Country
 import com.easyride.driverapp.NetWorkManager.NetWorkManagers
 import com.easyride.driverapp.NetWorkManager.NetWorkManagers.CompletionHandler
 import com.easyride.driverapp.NetWorkManager.RequestMethodType
 import com.easyride.driverapp.NetWorkManager.URLParams
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.json.JSONArray
 import org.json.JSONObject
 
 interface AddCarDetailsInterface {

@@ -5,7 +5,9 @@ public enum RequestMethodType {
     addVehicleDetails,
     addSocialDocument,
     userDoumentpending,
-    addProfilePhoto
+    addProfilePhoto,
+    singintapido,
+    addDrivingLicense
 
 
 }

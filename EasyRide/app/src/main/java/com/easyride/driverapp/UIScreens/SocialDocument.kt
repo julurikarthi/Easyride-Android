@@ -2,6 +2,7 @@ package com.easyride.driverapp.UIScreens
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,6 +24,7 @@ import androidx.core.widget.addTextChangedListener
 import com.easyride.driverapp.R
 import com.easyride.driverapp.UIScreens.ui.theme.EasyRideTheme
 import com.easyride.driverapp.Utilitys.Constants
+import com.easyride.driverapp.Utilitys.MySharedPreferences
 import com.easyride.driverapp.Utilitys.Preferences
 import com.easyride.driverapp.viewmodels.SocialDocumentsViewModel
 import com.easyride.driverapp.viewmodels.SocialDocumentsViewModelProtocol
@@ -47,12 +49,14 @@ class SocialDocument : ComponentActivity(), TextWatcher, SocialDocumentsViewMode
         socialNumber?.addTextChangedListener(this)
         reconfirmsocialNumber?.addTextChangedListener(this)
         viewModel.delegate = this
+
         savesocialbtn?.setOnClickListener {
             if (isSocialNumberEnter && isreconfirmSocialNumberEnter) {
-                var drivingID = Preferences.driverId!!
+                var preference = MySharedPreferences(this)
+                var dirverid = preference.getName(Constants.driverId)
                 var socialNumber = socialNumber?.text.toString()
                 addcarprogressviewSocialView?.visibility = View.VISIBLE
-                viewModel.submitSocialDocument(drivingID, socialNumber)
+                viewModel.submitSocialDocument(dirverid!!, socialNumber)
             }
         }
     }
@@ -62,7 +66,11 @@ class SocialDocument : ComponentActivity(), TextWatcher, SocialDocumentsViewMode
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
+                if(socialNumber?.text.toString().equals(reconfirmsocialNumber?.text.toString())) {
+                    savesocialbtn?.setTextColor(Color.WHITE)
+                } else {
+                    savesocialbtn?.setTextColor(Color.BLACK)
+                }
     }
 
     override fun afterTextChanged(s: Editable?) {

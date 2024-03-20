@@ -13,11 +13,11 @@ class ProfileDetailsViewModel {
 
     var delegate: ProfileDetailsDelegate? = null
 
-    fun saveProfileDetails(profilePhoto: String, fullAdress: String) {
+    fun saveProfileDetails(driverId: String, profilePhoto: String, fullAdress: String) {
         var params = JSONObject()
         params.put("fullAddress",fullAdress)
         params.put("profilePhoto",profilePhoto)
-        params.put("driverId",com.easyride.driverapp.Utilitys.Preferences.driverId)
+        params.put("driverId",driverId)
         NetWorkManagers.getInstance().postRequest(RequestMethodType.addProfilePhoto,
             params,
             object : CompletionHandler<JSONObject> {

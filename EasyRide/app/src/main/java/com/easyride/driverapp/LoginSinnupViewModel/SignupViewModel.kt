@@ -2,6 +2,7 @@ package com.easyride.driverapp.LoginSinnupViewModel
 
 import android.text.Editable
 import android.util.Log
+import com.easyride.driverapp.NetWorkManager.NetWorkCallsManagers
 import com.easyride.driverapp.NetWorkManager.NetWorkManagers
 import com.easyride.driverapp.NetWorkManager.NetWorkManagers.CompletionHandler
 import com.easyride.driverapp.NetWorkManager.RequestMethodType
@@ -63,8 +64,31 @@ class SignupViewModel {
             override fun onError(errorMessage: String?) {
                 Log.e("Error view", errorMessage.toString())
                 viewModelinterface?.onFailuresingup()
+                viewModelinterface?.getError(errorMessage)
             }
         })
+    }
+
+    fun singinUser(phoneNumber: String) {
+        val jsonObject = JSONObject()
+        jsonObject.put("phoneNumber", phoneNumber)
+        NetWorkManagers.getInstance().postRequest(RequestMethodType.singintapido, jsonObject,
+            object : CompletionHandler<JSONObject> {
+                override fun onSuccess(result: JSONObject?) {
+                    result?.let {
+                        val driverID = result.getString("driverID")
+                        val isRegistered = result.getBoolean("isRegistered")
+                        if (isRegistered) {
+                            viewModelinterface?.onSuccesssingup(driverID = driverID)
+                        }
+                    }
+                }
+
+                override fun onError(errorMessage: String?) {
+                    viewModelinterface?.getError(errorMessage)
+                }
+            })
+
     }
 
 }

@@ -15,4 +15,8 @@
     <string name="title_activity_profile_details">ProfileDetailsActivity</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_test_screen">TestScreenActivity</string>
+    <string name="title_activity_home_sceen">Rides</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="google_maps_key">AIzaSyCIVEtSk-0GZBgeVVezSYSnKMmuxb6umSM</string>
 </resources>

@@ -9,18 +9,19 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.appcompat.widget.AppCompatSpinner
 import com.easyride.driverapp.Adapters.CustomSpinnerAdapter
 import com.easyride.driverapp.R
-import com.easyride.driverapp.TodoActivityDelegate
 import com.easyride.driverapp.Utilitys.Constants
 import com.easyride.driverapp.Utilitys.Preferences
+import com.easyride.driverapp.Utilitys.Utilitys
 import com.easyride.driverapp.viewmodels.AddCarDetailsInterface
 import com.easyride.driverapp.viewmodels.AddCarModelData
 import com.easyride.driverapp.viewmodels.AddcarDetailsViewModel
@@ -59,6 +60,10 @@ public class AddCarDetailsActivity : ComponentActivity(), AddCarDetailsInterface
         actionBar?.title = "Edit Vehicle Info"
         addtoCarDetailsViewModel.delegate = this
         addtoCarDetailsViewModel.getAllcarsDetails()
+
+        val rootView: View = findViewById(android.R.id.content)
+        Utilitys.setupUI(rootView, this)
+
         val intent = intent
         carNumber?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -104,6 +109,7 @@ public class AddCarDetailsActivity : ComponentActivity(), AddCarDetailsInterface
                 )
                 addcarprogressview?.visibility = View.VISIBLE
                 addtoCarDetailsViewModel.addCarDetails(addCarmodel)
+                Utilitys.hideKeyboard(this)
             }
 
         }
@@ -168,7 +174,6 @@ public class AddCarDetailsActivity : ComponentActivity(), AddCarDetailsInterface
                 // Handle the case where nothing is selected (optional)
             }
         }
-
 
     }
 

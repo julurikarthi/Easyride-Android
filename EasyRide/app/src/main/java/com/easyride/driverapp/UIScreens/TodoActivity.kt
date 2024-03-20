@@ -1,4 +1,4 @@
-package com.easyride.driverapp
+package com.easyride.driverapp.UIScreens
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,16 +7,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.Composable
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.easyride.driverapp.UIScreens.AddCarDetailsActivity
-import com.easyride.driverapp.UIScreens.CameraActivity
-import com.easyride.driverapp.UIScreens.ProfileDetailsActivity
-import com.easyride.driverapp.UIScreens.SocialDocument
+import com.easyride.driverapp.R
+import com.easyride.driverapp.Utilitys.Constants
+import com.easyride.driverapp.Utilitys.MySharedPreferences
 import com.easyride.driverapp.viewmodels.DocumentExistence
 import com.easyride.driverapp.viewmodels.TodoViewModel
 import com.easyride.driverapp.viewmodels.TodoViewModelProtocol
-import com.google.android.material.snackbar.Snackbar
 import java.io.Serializable
 
 
@@ -54,6 +51,9 @@ class TodoActivity : ComponentActivity(), TodoActivityDelegate, TodoViewModelPro
                     "profileDetailsAdded" -> {
                         onSuccessAddingProfile()
                     }
+                    "todocdrivinglicence" -> {
+                        onSuccessAddingDrivingLicense()
+                    }
                 }
 
             }
@@ -63,8 +63,9 @@ class TodoActivity : ComponentActivity(), TodoActivityDelegate, TodoViewModelPro
         super.onCreate(savedInstanceState)
         setContentView(R.layout.todo_activity)
         viewModel.delegate = this
-        viewModel.getDocumentSubmitDetails()
-
+        var preference = MySharedPreferences(this)
+        var dirverid = preference.getName(Constants.driverId)
+        viewModel.getDocumentSubmitDetails(dirverid!!)
         carsuccessicon = findViewById(R.id.carsuccessicon)
         driversuccesicon = findViewById(R.id.driversuccesicon)
         socialidicon = findViewById(R.id.socialidicon)

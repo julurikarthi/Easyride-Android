@@ -5,30 +5,46 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="18dp"
-        android:textColor="@color/color_primary"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical"
-        android:text="Select"></TextView>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:orientation="horizontal"
+      android:layout_marginTop="20dp"
+      android:layout_height="wrap_content">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/roboto_medium"
+          android:textSize="18dp"
+          android:textColor="@color/color_primary"
+          android:layout_marginLeft="20dp"
+          android:layout_marginTop="0dp"
+          android:layout_gravity="center_vertical"
+          android:text="Select"></TextView>
+
+      <ImageView
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_alignParentEnd="true"
+          android:layout_marginRight="20dp"
+          android:id="@+id/closebtn"
+          android:src="@drawable/newclosebtn"></ImageView>
+  </RelativeLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="0.5dp">
+        android:layout_height="1.0dp">
 
     </com.google.android.material.divider.MaterialDivider>
   <LinearLayout
-      android:layout_width="wrap_content"
+      android:layout_width="fill_parent"
       android:orientation="horizontal"
       android:layout_marginLeft="20dp"
-      android:layout_marginTop="20dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginRight="20dp"
+      android:id="@+id/cameraview"
       android:layout_height="wrap_content">
       <ImageView
           android:id="@+id/buttonShowSnackbar"
@@ -48,10 +64,13 @@
   </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:orientation="horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/gallaryView"
+        android:layout_marginBottom="100dp"
         android:layout_height="wrap_content">
         <ImageView
             android:layout_width="35dp"
@@ -66,7 +85,7 @@
             android:layout_marginLeft="50dp"
             android:textColor="@color/black"
             android:layout_gravity="center_vertical"
-            android:text="Gallary"></TextView>
+            android:text="Gallery"></TextView>
     </LinearLayout>
 
 </LinearLayout>

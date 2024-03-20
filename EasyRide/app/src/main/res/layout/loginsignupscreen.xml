@@ -28,30 +28,36 @@
         android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:textSize="18dp"></TextView>
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textColorHint="#3C3C43"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="4dp"
-        android:padding="10dp"
-        android:id="@+id/firstName"
-        android:background="@drawable/rounded_edittext_bg"
-        android:textSize="15dp"
-        android:hint="Enter First Name"></EditText>
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textColorHint="#3C3C43"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="4dp"
-        android:padding="10dp"
-        android:id="@+id/lastName"
-        android:background="@drawable/rounded_edittext_bg"
-        android:textSize="15dp"
-        android:hint="Enter Last Name"></EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/signupViewfeilds"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="#3C3C43"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="4dp"
+            android:padding="10dp"
+            android:id="@+id/firstName"
+            android:background="@drawable/rounded_edittext_bg"
+            android:textSize="15dp"
+            android:hint="Enter First Name"></EditText>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="#3C3C43"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="4dp"
+            android:padding="10dp"
+            android:id="@+id/lastName"
+            android:background="@drawable/rounded_edittext_bg"
+            android:textSize="15dp"
+            android:hint="Enter Last Name"></EditText>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -143,6 +149,16 @@
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"></TextView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="15dp"
+        android:id="@+id/loginbtn"
+        android:background="#00FFFFFF"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_gravity="center"></Button>
 </LinearLayout>
     <ProgressBar
         android:layout_width="wrap_content"

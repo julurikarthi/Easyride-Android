@@ -1,15 +1,12 @@
 package com.easyride.driverapp.viewmodels
 
 import android.util.Log
-import com.easyride.driverapp.NetWorkManager.NetWorkManagers
-import com.easyride.driverapp.NetWorkManager.NetWorkManagers.CompletionHandler
 import com.easyride.driverapp.NetWorkManager.RequestMethodType
-import com.easyride.driverapp.Utilitys.Constants
-import com.easyride.driverapp.Utilitys.Preferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
-
+import com.easyride.driverapp.NetWorkManager.NetWorkManagers
+import com.easyride.driverapp.NetWorkManager.NetWorkManagers.CompletionHandler
 interface TodoViewModelProtocol {
     fun onSuccess(model: DocumentExistence)
     fun onFailure(error: String?)
@@ -18,10 +15,9 @@ class TodoViewModel {
 
     var delegate: TodoViewModelProtocol? = null
 
-    fun getDocumentSubmitDetails() {
-        var driverId = Preferences.getInstance().getString(Constants.driverId, "65df785c1d4cc")
+    fun getDocumentSubmitDetails(dirverid: String) {
         var jsonObje = JSONObject()
-        jsonObje.put("driverId",driverId)
+        jsonObje.put("driverId",dirverid)
         NetWorkManagers.getInstance().postRequest(RequestMethodType.userDoumentpending,
             jsonObje,
             object : CompletionHandler<JSONObject> {

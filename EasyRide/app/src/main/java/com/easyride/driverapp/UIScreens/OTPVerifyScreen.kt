@@ -3,29 +3,23 @@ package com.easyride.driverapp.UIScreens
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import com.easyride.driverapp.R
-import com.easyride.driverapp.TodoActivity
-import com.easyride.driverapp.UIScreens.ui.theme.EasyRideTheme
 
 class OTPVerifyScreen : ComponentActivity(), TextWatcher {
     var otpnext: TextView?= null
+    var otpedittext: EditText?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.otpverifyscreen)
         otpnext = findViewById(R.id.otpnext)
+        otpedittext = findViewById(R.id.otpedittext)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setElevation(0f)
         actionBar?.title = ""
@@ -33,8 +27,9 @@ class OTPVerifyScreen : ComponentActivity(), TextWatcher {
             val homeactivityintent = Intent(this, TodoActivity::class.java)
             startActivity(homeactivityintent)
         }
-        otpnext?.addTextChangedListener(this)
-
+        otpedittext?.addTextChangedListener(this)
+        val maxLength = 4
+        otpedittext?.filters = arrayOf(InputFilter.LengthFilter(maxLength))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,7 +47,7 @@ class OTPVerifyScreen : ComponentActivity(), TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (otpnext?.text?.count() == 4) {
+        if (otpedittext?.text?.count() == 4) {
             otpnext?.setTextColor(ContextCompat.getColor(this, android.R.color.white))
         } else {
             otpnext?.setTextColor(ContextCompat.getColor(this, android.R.color.black))

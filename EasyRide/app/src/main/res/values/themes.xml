@@ -4,7 +4,7 @@
     <style name="Theme.EasyRide" parent="android:Theme.Material.Light.DarkActionBar">
         <item name="android:colorPrimary">@color/color_primary</item>
         <item name="colorPrimary">@color/color_primary</item>
-</style>
+    </style>
 
     <style name="Theme.EasyRide.appcompact" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:colorPrimary">@color/color_primary</item>

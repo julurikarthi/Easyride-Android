@@ -149,9 +149,10 @@ public class NetWorkManagers {
             RequestParams params = new RequestParams();
             // Add the image file to the request
             params.put("image", imageFile);
+            params.put("method", "uploadTapidoImage");
 
             // Perform the upload
-            client.post("UPLOAD_URL", params, responseHandler);
+            client.post(URLParams.base_url, params, responseHandler);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             // Handle the exception appropriately
@@ -159,7 +160,7 @@ public class NetWorkManagers {
     }
 
     public void postedRequest(RequestMethodType methodType,
-                            JSONObject params, final CompletionHandler<JSONObject> completionHandler) {
+                              JSONObject params, final CompletionHandler<JSONObject> completionHandler) {
 
         JSONObject postData = new JSONObject();
         try {
