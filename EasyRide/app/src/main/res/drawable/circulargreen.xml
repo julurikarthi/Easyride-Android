@@ -1,5 +1,0 @@
-<!-- circular_rounded_background.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#47B02C"/> <!-- Set the background color here -->
-    <corners android:radius="50dp"/> <!-- Set a large radius to make it circular -->
-</shape>
