@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "372430672576",
+    "project_id": "easyride-417501",
+    "storage_bucket": "easyride-417501.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372430672576:android:ba66c85b21b531bc839325",
+        "android_client_info": {
+          "package_name": "com.easyride.driverapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVJp4YOGxix8xLSbWt_Dy2GBrsfJoHaEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
