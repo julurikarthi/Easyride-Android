@@ -1,4 +1,5 @@
 package com.easyride.driverapp.NetWorkManager
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import com.easyride.driverapp.Adapters.ApplicationContextProvider
@@ -11,6 +12,7 @@ import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -26,7 +28,6 @@ class NetWorkCallsManagers {
     }
 
     private val client = AsyncHttpClient()
-
     companion object {
         @Volatile
         private var instance: NetWorkCallsManagers? = null
@@ -44,9 +45,14 @@ class NetWorkCallsManagers {
         params: JSONObject,
         completionHandler: CompletionHandler<JSONObject>
     ) {
-        val client = AsyncHttpClient()
+        requestCall(activity, methodType,
+            params, completionHandler)
+    }
 
-        GlobalScope.launch(Dispatchers.IO) {
+     fun requestCall(activity: Activity,
+                            methodType: RequestMethodType,
+                            params: JSONObject,
+                            completionHandler: CompletionHandler<JSONObject>) {
             try {
                 val postData = JSONObject().apply {
                     put("method", methodType.toString())
@@ -58,46 +64,32 @@ class NetWorkCallsManagers {
                 val entity = StringEntity(postdv.toString())
                 val applicationContext = activity.applicationContext
 
-                activity.runOnUiThread {
-                    client.post(
-                        applicationContext,
-                        URLParams.base_url,
-                        entity,
-                        "application/json",
-                        object : JsonHttpResponseHandler() {
-                            override fun onSuccess(statusCode: Int, headers: Array<Header>, response: JSONObject) {
-                                try {
-                                    val status = response.getString("status")
-                                    if (status == "success") {
-                                        val dataObject = response.optJSONObject("data") ?: JSONObject()
-                                        completionHandler.onSuccess(dataObject)
-                                    } else {
-                                        val message = response.getString("message")
-                                        completionHandler.onError(message)
-                                    }
-                                } catch (e: JSONException) {
-                                    Log.e("exception", e.toString())
-                                    completionHandler.onError("JSON parsing error")
-                                }
-                            }
-
-                            override fun onFailure(
-                                statusCode: Int,
-                                headers: Array<Header>,
-                                throwable: Throwable,
-                                errorResponse: JSONObject?
-                            ) {
-                                Log.e("error in jsn", errorResponse.toString())
-                                completionHandler.onError(errorResponse?.toString() ?: "Unknown error")
-                            }
+                client.post(
+                    applicationContext,
+                    URLParams.base_url,
+                    entity,
+                    "application/json",
+                    object : JsonHttpResponseHandler() {
+                        override fun onSuccess(statusCode: Int, headers: Array<Header>, response: JSONObject) {
+                            handleResponse(response, completionHandler)
                         }
-                    )
-                }
+
+                        override fun onFailure(
+                            statusCode: Int,
+                            headers: Array<Header>,
+                            throwable: Throwable,
+                            errorResponse: JSONObject?
+                        ) {
+                            Log.e("error in jsn", errorResponse.toString())
+                            handleError(errorResponse, completionHandler)
+                        }
+                    }
+                )
+
             } catch (e: Exception) {
                 Log.e("postRequest", "Error: ${e.message}", e)
                 completionHandler.onError(e.message ?: "Unknown error")
             }
-        }
     }
 
     fun getRequest(url: String, completionHandler: CompletionHandler<JSONObject>) {
@@ -240,5 +232,26 @@ class NetWorkCallsManagers {
             })
     }
 
+    private fun handleResponse(response: JSONObject?, completionHandler: CompletionHandler<JSONObject>) {
+        try {
+            val status = response?.getString("status")
+            if (status == "success") {
+                val dataObject = response.optJSONObject("data") ?: JSONObject()
+                    completionHandler.onSuccess(dataObject)
+
+            } else {
+                val message = response?.getString("message") ?: "Unknown error"
+                    completionHandler.onError(message)
+            }
+        } catch (e: JSONException) {
+            Log.e("exception", e.toString())
+                completionHandler.onError("JSON parsing error")
+        }
+    }
+
+    private fun handleError(errorResponse: JSONObject?, completionHandler: CompletionHandler<JSONObject>, e: Exception? = null) {
+        val errorMessage = errorResponse?.toString() ?: e?.message ?: "Unknown error"
+            completionHandler.onError(errorMessage)
+    }
 
 }
