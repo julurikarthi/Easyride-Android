@@ -121,8 +121,9 @@ class NetWorkCallsManagers {
         }
     }
 
-    // Other methods...
+    
 
+    // Other methods...
     fun getRequest(
         url: String?,
         completionHandler: NetWorkManagers.CompletionHandler<JSONObject?>

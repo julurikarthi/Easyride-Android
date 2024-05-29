@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.easyride.driverapp.Adapters.TapidoApplication
 import com.easyride.driverapp.R
 import com.easyride.driverapp.ScheduleService.SchedulerService
 import com.easyride.driverapp.Services.LocationForegroundService
@@ -263,23 +264,11 @@ class HomeSceenActivity() : AppCompatActivity(),
     }
 
     private fun requestFirebaseToken() {
-        GlobalScope.launch {
-            FirebaseInstallations.getInstance().getToken(/* forceRefresh = */ true)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val token = task.result?.token
-                        // Handle token
-                        if (token != null) {
-                            homescreenviewModel.registeredforNotification(token)
-                        }
-                    } else {
-                        // Handle error
-                        val exception = task.exception
-                        exception?.printStackTrace()
-                    }
-                }
+        val pref = MySharedPreferences(TapidoApplication.getAppContext())
+        var notificationToken = pref.getName("notificationToken")
+        notificationToken?.let {
+            homescreenviewModel.registeredforNotification(it)
         }
-
     }
 
 }

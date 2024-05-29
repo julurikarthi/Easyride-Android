@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.os.Handler
+import android.os.Looper
 import androidx.core.app.ActivityCompat
 import com.easyride.driverapp.NetWorkManager.NetWorkCallsManagers
 import com.easyride.driverapp.NetWorkManager.RequestMethodType
@@ -21,6 +23,8 @@ import kotlin.coroutines.suspendCoroutine
 class HomeFragmentViewModel {
     var delegate: HomeFragmentInterface? = null
     val REQUEST_LOCATION_PERMISSION_CODE = 1001
+    private val handler = Handler(Looper.getMainLooper())
+
     fun getDirectionsUrl(origin: com.google.android.gms.maps.model.LatLng, dest: com.google.android.gms.maps.model.LatLng): String? {
 
         // Origin of route
@@ -54,7 +58,9 @@ class HomeFragmentViewModel {
             val driverActiveLocation = ""+location?.latitude + "," + ""+location?.longitude ?: ""
             val city = location?.city ?: ""
             val state = location?.state ?: ""
-            updateDriverStatus(activity, driverId = driverId, driverActiveLocation = driverActiveLocation, driverActiveZipcode = location?.zipCode ?: "", driverStatus = driverStatus.toString(), ontripStatus = ontripStatus.toString(), driverCity = city, driverState = state )
+            handler.post {
+                updateDriverStatus(activity, driverId = driverId, driverActiveLocation = driverActiveLocation, driverActiveZipcode = location?.zipCode ?: "", driverStatus = driverStatus.toString(), ontripStatus = ontripStatus.toString(), driverCity = city, driverState = state )
+            }
         }
 
     }

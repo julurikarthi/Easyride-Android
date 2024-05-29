@@ -37,7 +37,8 @@ public class NetWorkManagers {
 
     // Your methods here
     public void postRequest(RequestMethodType methodType,
-                            JSONObject params, final CompletionHandler<JSONObject> completionHandler) throws UnsupportedEncodingException {
+                            JSONObject params,
+                            final CompletionHandler<JSONObject> completionHandler) throws UnsupportedEncodingException {
 
         JSONObject postData = new JSONObject();
         JSONObject postdv= new JSONObject();
